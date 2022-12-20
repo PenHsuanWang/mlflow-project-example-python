@@ -296,8 +296,9 @@ if __name__ == "__main__":
     # autolog with only rank 0 gpu.
     
     # Defining the tracking backend uri
-    mlflow.set_tracking_uri("http://127.0.0.1:5010")
+    mlflow.set_tracking_uri("http://3.112.40.176:5010")
     run_id = ''
+    mlflow.set_experiment("/ben-demo-pytorch")
 
     # Start a mlflow run with run name provided.
     with mlflow.start_run(run_name='pytorch-mnist-example'):
@@ -335,7 +336,7 @@ if __name__ == "__main__":
     from mlflow.tracking.client import MlflowClient
     from mlflow.entities.model_registry.model_version_status import ModelVersionStatus
     
-    client = MlflowClient(tracking_uri='http://127.0.0.1:5010')
+    client = MlflowClient(tracking_uri='http://3.112.40.176:5010')
     
     def wait_until_ready(model_name, model_version):
         

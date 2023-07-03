@@ -69,7 +69,10 @@ import mlflow
 import mlflow.keras
 import mlflow.tensorflow
 
-mlflow.set_tracking_uri("http://127.0.0.1:5010")
+mlflow.set_tracking_uri("http://ec2-44-213-176-187.compute-1.amazonaws.com:7005")
+ 
+mlflow.MLFLOW_TRACKING_USERNAME = "pwang"
+mlflow.MLFLOW_TRACKING_PASSWORD = "pwang"
  
 X_train, y_train = get_training_data()
  
@@ -282,38 +285,38 @@ forecast_power(model_name, "Production")
 
 # %%
 
-# Archive the model, version 1
+# # Archive the model, version 1
 
-# When a model version is no longer being used, you can archive it or delete it. You can delete entire registered model, this removes all its associated model versions.
+# # When a model version is no longer being used, you can archive it or delete it. You can delete entire registered model, this removes all its associated model versions.
 
-# Archive version_1 windpower-model
-from mlflow.tracking.client import MlflowClient
-client = MlflowClient()
-client.transition_model_version_stage(
-  name=model_name,
-  version=1,
-  stage="Archived",
-)
+# # Archive version_1 windpower-model
+# from mlflow.tracking.client import MlflowClient
+# client = MlflowClient()
+# client.transition_model_version_stage(
+#   name=model_name,
+#   version=1,
+#   stage="Archived",
+# )
 
-# %%
+# # %%
 
-# Delete version 1 model
+# # Delete version 1 model
 
-client.delete_model_version(
-  name=model_name,
-  version=1,
-)
+# client.delete_model_version(
+#   name=model_name,
+#   version=1,
+# )
 
-# %%
+# # %%
 
-# Delete the power forecasting model
+# # Delete the power forecasting model
 
-client.transition_model_version_stage(
-  name=model_name,
-  version=2,
-  stage="Archived"
-)
+# client.transition_model_version_stage(
+#   name=model_name,
+#   version=2,
+#   stage="Archived"
+# )
 
-client.delete_registered_model(name=model_name)
+# client.delete_registered_model(name=model_name)
 
 # %%
